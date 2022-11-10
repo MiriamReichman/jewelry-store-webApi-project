@@ -22,5 +22,14 @@ namespace MyLibrary
         public virtual User User { get; set; }
     //[JsonIgnore]
         public virtual ICollection<OrderItem> OrderItems { get; set; }
+
+
+
+
+
+
+
+
+
     }
 }

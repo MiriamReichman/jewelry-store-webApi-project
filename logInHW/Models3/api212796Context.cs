@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 #nullable disable
 
-namespace logInHW.Models
+namespace logInHW.Models3
 {
     public partial class api212796Context : DbContext
     {
@@ -21,6 +21,9 @@ namespace logInHW.Models
         public virtual DbSet<GameCategorie> GameCategories { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<OrderItem> OrderItems { get; set; }
+        public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<ProductCategorie> ProductCategories { get; set; }
+        public virtual DbSet<Rating> Ratings { get; set; }
         public virtual DbSet<User> Users { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -114,6 +117,75 @@ namespace logInHW.Models
                     .WithMany(p => p.OrderItems)
                     .HasForeignKey(d => d.ProuductId)
                     .HasConstraintName("FK_PROUDUCT_ID");
+            });
+
+            modelBuilder.Entity<Product>(entity =>
+            {
+                entity.HasKey(e => e.ProdId);
+
+                entity.Property(e => e.ProdId).HasColumnName("prod_Id");
+
+                entity.Property(e => e.CategorieId).HasColumnName("Categorie_Id");
+
+                entity.Property(e => e.Description)
+                    .HasMaxLength(50)
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Image)
+                    .HasMaxLength(10)
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Name)
+                    .HasMaxLength(50)
+                    .IsFixedLength(true);
+
+                entity.HasOne(d => d.Categorie)
+                    .WithMany(p => p.Products)
+                    .HasForeignKey(d => d.CategorieId)
+                    .HasConstraintName("FK_Products_ProductsCategorie");
+            });
+
+            modelBuilder.Entity<ProductCategorie>(entity =>
+            {
+                entity.HasKey(e => e.CategoresId);
+
+                entity.ToTable("ProductCategorie");
+
+                entity.Property(e => e.CategoresId).HasColumnName("Categores_Id");
+
+                entity.Property(e => e.Name)
+                    .HasMaxLength(50)
+                    .IsFixedLength(true);
+            });
+
+            modelBuilder.Entity<Rating>(entity =>
+            {
+                entity.ToTable("Rating");
+
+                entity.Property(e => e.RatingId).HasColumnName("RATING_ID");
+
+                entity.Property(e => e.Host)
+                    .HasMaxLength(50)
+                    .HasColumnName("HOST");
+
+                entity.Property(e => e.Method)
+                    .HasMaxLength(10)
+                    .HasColumnName("METHOD")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Path)
+                    .HasMaxLength(50)
+                    .HasColumnName("PATH");
+
+                entity.Property(e => e.RecordDate)
+                    .HasColumnType("datetime")
+                    .HasColumnName("Record_Date");
+
+                entity.Property(e => e.Referer)
+                    .HasMaxLength(100)
+                    .HasColumnName("REFERER");
+
+                entity.Property(e => e.UserAgent).HasColumnName("USER_AGENT");
             });
 
             modelBuilder.Entity<User>(entity =>

@@ -6,7 +6,8 @@ namespace DL
 {
     public interface IProductDl
     {
-        Task<List<Game>> GetGames();
-        Task<List<Game>> GetGamesByCategorie(int id);
+        Task<List<Product>> GetGames();
+        Task<List<Product>> GetGamesByCategorie(int id);
+        Task<Product> GetProductById(int id);
     }
 }

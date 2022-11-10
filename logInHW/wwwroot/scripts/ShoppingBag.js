@@ -34,9 +34,9 @@ function drowCart(item) {
     cln.querySelector(".itemName").innerText = item.product.name;
     cln.querySelector(".itemNumber").innerText = item.product.prodId;
     cln.querySelector(".price").innerText = "₪" + item.product.price ;
-    var url = "url(./images/" + item.product.image + ".png)";
+    var url = "url(./images/" + item.product.image + ".jpg)";
     //cln.querySelector(".image").style.backgroundImage =url;
-    cln.querySelector(".image").src = "./images/" + item.product.image + ".png";
+    cln.querySelector(".image").src = "./images/" + item.product.image + ".jpg";
     cln.querySelector(".quntity").innerText = item.quntity;
     cln.getElementById('delete').addEventListener("click", () => {
         removeItem(item.product);
@@ -83,6 +83,7 @@ function placeOrder() {
         orderItems.push(item);
     })
         ;
+
     var order = {
         "orderId": 0,
         "orderDate": new Date(),
@@ -103,11 +104,13 @@ function placeOrder() {
                 return response.json()
 
             else {
-                alert("something whent wrong ");
+ 
 
-                return "erro";
+                throw new Error("error in placing order try agian.");
             }
-        })
+        }).then((data)=>{
+            alert("order num :" + data.orderId+"sucsseded!");
+    })
        
       .catch((error) => { console.log(error); alert(error) });
 //}

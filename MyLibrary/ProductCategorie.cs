@@ -5,17 +5,16 @@ using System.Collections.Generic;
 
 namespace MyLibrary
 {
-    public partial class GameCategorie
+    public partial class ProductCategorie
     {
-        public GameCategorie()
+        public ProductCategorie()
         {
-            Games = new HashSet<Game>();
+            Products = new HashSet<Product>();
         }
 
         public int CategoresId { get; set; }
         public string Name { get; set; }
 
-     
-        public virtual ICollection<Game> Games { get; set; }
+        public virtual ICollection<Product> Products { get; set; }
     }
 }

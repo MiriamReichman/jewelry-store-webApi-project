@@ -17,10 +17,10 @@ namespace DL
             this.dbContext = dbContext;
         }
 
-        public async Task<List<GameCategorie>> GetCategoriesAsync()
+        public async Task<List<ProductCategorie>> GetCategoriesAsync()
         {
             ////להחזיר את רשימת הקגורית
-            var u = await dbContext.GameCategories.ToListAsync();
+            var u = await dbContext.ProductCategories.ToListAsync();
             return u;
                 }
 

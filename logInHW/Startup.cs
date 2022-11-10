@@ -1,8 +1,9 @@
 using BL;
 using DL;
-using logInHW.Models;
+using logInHW.Models3;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -46,7 +47,7 @@ namespace logInHW
             services.AddScoped<ICategoriesBl, CategoriesBl>();
             services.AddScoped<ICategoriesDl, CategoriesDl>();
             services.AddDbContext<DL.api212796Context>(options => options.UseSqlServer(
-                Configuration.GetConnectionString("School")
+                Configuration.GetConnectionString("Home")
             ), ServiceLifetime.Scoped);
 
             services.AddAutoMapper(typeof(Startup));
@@ -70,10 +71,31 @@ namespace logInHW
             }
             Logger.LogInformation("server is up!");
             // catch all errors by middleware Logger.LogError("ops!!!!!!!!!");
-            app.UseErrorHandlingMiddleware();
+           // app.UseErrorHandlingMiddleware();
+
+            //use rating middleware
+            app.UseRatingMiddleware();
+            
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();
+            //use caching middleware/
+            app.UseResponseCaching();
+
+            app.Use(async (context, next) =>
+            {
+                context.Response.GetTypedHeaders().CacheControl =
+                    new Microsoft.Net.Http.Headers.CacheControlHeaderValue()
+                    {
+                        Public = true,
+                        MaxAge = TimeSpan.FromSeconds(20)
+                    };
+                context.Response.Headers[Microsoft.Net.Http.Headers.HeaderNames.Vary] =
+                    new string[] { "Accept-Encoding" };
+
+                await next();
+            });
+
 
             app.UseAuthorization();
 

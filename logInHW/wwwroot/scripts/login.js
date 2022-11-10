@@ -1,5 +1,4 @@
 ﻿function login() {
-    //fetch("api/Server/?email=" + document.getElementById("email").value + "&password=" + document.getElementById("password").value)
     fetch("api/Server/" + document.getElementById("email").value + "/" + document.getElementById("password").value)
         .then((response) => {
 
@@ -17,10 +16,10 @@
             console.log(data);
             //alert("oooooo")
             if (data != "erro") {
-                alert("welcome back " + data.firstName);
+              //  alert("welcome back " + data.firstName);
                 sessionStorage.setItem('user', JSON.stringify(data));
-                window.location.href = "welcomeBack.html";
-
+                window.location.href = "welcomeBack.html" ;
+              /*  document.getElementById("wellcom").innerText = "wellcom back" + data.firstName;*/
 
             }
 
@@ -35,7 +34,9 @@ function load() {
     document.getElementById("lastName1").value =old.lastName;
 
 }
-
+function addNewUser() {
+    document.getElementById("add").style.display = "block";
+}
 function sign() {
     fetch("api/Server", {
     method: 'POST',
@@ -50,11 +51,19 @@ function sign() {
  
     })
     
-    }).then(response => {return response.json() })
-    .then(data => {
-        alert('Success:', data);
-        
+    }).then(response => {
+        if (response.ok && response.status == 200)
+            return response.json()
+        else {
+            throw new Error( response.statusText);
+           
+        }
     })
+        .then(data => {
+          
+        alert('Success:', data.firstName);
+        
+    }).catch((error) => {  alert(error) });
 
 }
 function update() {
@@ -78,6 +87,10 @@ function update() {
 
         })
 
+}
+function loadExsisting() {
+    var user = JSON.parse(sessionStorage.getItem('user'))
+    document.getElementById("wellcom").innerText = "wellcom back : " + user.firstName+"!!!!";
 }
 function enter() {
     window.location.href = "Products.html";

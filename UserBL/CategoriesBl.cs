@@ -15,7 +15,7 @@ namespace BL
         {
             this.ICategoriesDL = ICategoriesDL;
         }
-        public async Task<List<GameCategorie>> GetCategoriesAsync()
+        public async Task<List<ProductCategorie>> GetCategoriesAsync()
         {
             var user = await ICategoriesDL.GetCategoriesAsync();
             return user;

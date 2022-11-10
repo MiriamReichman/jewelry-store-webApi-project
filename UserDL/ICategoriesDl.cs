@@ -6,6 +6,6 @@ namespace DL
 {
     public interface ICategoriesDl
     {
-        Task<List<GameCategorie>> GetCategoriesAsync();
+        Task<List<ProductCategorie>> GetCategoriesAsync();
     }
 }

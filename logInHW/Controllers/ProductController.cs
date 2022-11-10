@@ -13,7 +13,6 @@ using System.Threading.Tasks;
 namespace logInHW.Controllers
 {
 
-
     [Route("api/[controller]")]
     [ApiController]
     public class ProductController : ControllerBase
@@ -27,42 +26,21 @@ namespace logInHW.Controllers
         }
         // GET: api/<ProductController>
         [HttpGet]
-        public async Task<List<ProductDTO>> Get()
+        public async Task<List<Product>> Get()
         {
-            List<Game> Product = await IProductBl.GetGames();
-            return mapper.Map < List<ProductDTO>>(Product);
+            List<Product> Product = await IProductBl.GetGames();
+            return Product;
         }
 
         // GET api/<ProductController>/5
         [HttpGet("{id}")]
-        public async Task<List<ProductDTO>> Get(int id)
+        /*ProductגTO TO ה*/
+        public async Task<List<Product>> Get(int id)
         {
-            List<Game> Product =await IProductBl.GetGamesByCategorie(id);
-                return mapper.Map<List<ProductDTO>>(Product);
+            List<Product> Product =await IProductBl.GetGamesByCategorie(id);
+            //return mapper.Map<List<ProductDTO>>(Product);
+            return Product;
         }
 
-
-
-
-
-
-
-        //// POST api/<ProductController>
-        //[HttpPost]
-        //public void Post([FromBody] string value)
-        //{
-        //}
-
-        //// PUT api/<ProductController>/5
-        //[HttpPut("{id}")]
-        //public void Put(int id, [FromBody] string value)
-        //{
-        //}
-
-        //// DELETE api/<ProductController>/5
-        //[HttpDelete("{id}")]
-        //public void Delete(int id)
-        //{
-        //}
     }
 }

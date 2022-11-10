@@ -41,7 +41,7 @@ p.description{
     height:65px;
 }
 .bar::before {
-    content: 'חנות הצעצועים שלי';
+    content: 'תכשיטים B&M';
     color: white;
     /* display: inline-block; */
     position: absolute;

@@ -6,6 +6,6 @@ namespace BL
 {
     public interface ICategoriesBl
     {
-        Task<List<GameCategorie>> GetCategoriesAsync();
+        Task<List<ProductCategorie>> GetCategoriesAsync();
     }
 }

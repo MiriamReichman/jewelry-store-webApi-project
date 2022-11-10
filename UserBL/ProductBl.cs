@@ -15,13 +15,18 @@ namespace BL
         {
             this.ProductDl = ProductDl;
         }
-        public async Task<List<Game>> GetGames()
+        public async Task<List<Product>> GetGames()
         {
             return await ProductDl.GetGames();
         }
-        public async Task<List<Game>> GetGamesByCategorie(int id)
+        public async Task<List<Product>> GetGamesByCategorie(int id)
         {
             return await ProductDl.GetGamesByCategorie(id);
         }
-    }
+        public async Task<Product> GetProductById(int id)
+        {
+            return await ProductDl.GetProductById(id);
+        }
+
+        }
 }

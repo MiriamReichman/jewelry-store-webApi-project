@@ -18,15 +18,24 @@ namespace DL
             this.dbContext = dbContext;
         }
 
-        public async Task<List<Game>> GetGames()
+        public async Task<List<Product>> GetGames()
         {
-          
-             return await dbContext.Games.ToListAsync();
+            //dbContext.Products
+
+
+           //return await dbContext.Games.ToListAsync();
+              return await dbContext.Products.ToListAsync();
         }
-        public async Task<List<Game>> GetGamesByCategorie(int id)
+        public async Task<List<Product>> GetGamesByCategorie(int id)
         {
            
-            List<Game> a =await dbContext.Games.Where(e=>e.Categorie.CategoresId == id).ToListAsync();
+            List<Product> a =await dbContext.Products.Where(e=>e.Categorie.CategoresId == id).ToListAsync();
+            return a;
+        }
+        public async Task<Product> GetProductById(int id)
+        {
+
+            Product a = await dbContext.Products.Where(e => e.ProdId == id).FirstOrDefaultAsync();
             return a;
         }
     }

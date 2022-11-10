@@ -26,17 +26,22 @@ namespace logInHW.Controllers
 
         // GET: api/<CategoriesController>
         [HttpGet]
-        public async Task<List<ProductCategorieDTO>> Get()
+        public async Task<List<ProductCategorie>> Get()
         {
-        
-              List<GameCategorie> v= await ICategoriesBL.GetCategoriesAsync();
-            return mapper.Map<List<ProductCategorieDTO>>(v);
+            List<ProductCategorie> v = await ICategoriesBL.GetCategoriesAsync();
+                return  v;
         }
+        //{Task<List<ProductCategorieDTO>>
 
-
-
-
-
+        //      List<ProductCategorie> v= await ICategoriesBL.GetCategoriesAsync();
+        //    return  mapper.Map<List<ProductCategorieDTO>>(v);
 
     }
+
+
+
+
+
+
 }
+
